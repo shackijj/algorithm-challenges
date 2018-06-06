@@ -1,12 +1,19 @@
 const powerSum = require('../src/powerSum');
 
 describe('powerSum', () => {
-    function checkOutput({params, output}) {
+/*     function checkOutput({params, output}) {
         it(`given that params are ${JSON.stringify(params)}`, () => {
-            expect(output).to.equal(powerSum(1, params.n, params.x));
+            expect(output).to.equal(powerSum(Math.pow(params.x, 1 / params.n), params.n, params.x));
         });
     }
     [
+        {
+            params: {
+                x: 10,
+                n: 2
+            },
+            output: 1,
+        },
         {
             params: {
                 x: 13,
@@ -49,5 +56,9 @@ describe('powerSum', () => {
             },
             output: 3
         }
-    ].forEach(checkOutput);
+    ].forEach(checkOutput); */
+
+    it('will return 3', () => {
+        expect(powerSum(7, 2, 100)).to.equal(1);
+    });
 });

@@ -1,29 +1,24 @@
-function powerSum(n, p, s) {
-    const lastPow = Math.pow(n, p);
-    if (lastPow > s) {
+function powerSum(n, p, x, exclude = []) {
+    if (n === 0) {
         return 0;
     }
-    if (lastPow === s) {
-        return 1;
-    }
-    let i = n - 1;
-    let sum = lastPow;
+    let i = n;
+    let sum = Math.pow(i, p);
     let comb = 0;
+
     while(i >= 1) {
-        sum += Math.pow(i, p);
-        if (sum === s) {
-            comb++;
-            sum -= Math.pow(i, p);
-        } else if (sum > s) {
-            if (i + 1 < n) {
-                sum -= Math.pow(i + 1, p);
-            } else {
-                sum -= Math.pow(i, p);
-            }
+        if (sum > x) {
+            comb += powerSum(n, p, x, exclude.concat([i]));
+        } else if (sum === x) {
+            return 1 + comb;
         }
         i--;
+        if (exclude.indexOf(i) === -1) {
+            sum += Math.pow(i, p);
+        }
     }
-    return comb + powerSum(n + 1, p, s);
+
+    return comb + powerSum(n - 1, p, x, exclude);
 }
 
 module.exports = powerSum;
